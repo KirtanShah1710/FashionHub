@@ -1,0 +1,94 @@
+<div class="container">
+    <h2 class="mb-3 p-3 position-sticky bg-white" style="top: 55px; box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.2);">Admin Orders</h2>
+
+    <!-- FILTERS -->
+    <div class="row g-1 border rounded shadow-sm">
+        <div class="col col-md-3 mt-0 mb-3 p-4 position-sticky" style="height: fit-content; top: 140px;">
+            <h5>Filter Orders</h5>
+            <!-- Order Status Filter -->
+            <div>
+                <label class="form-label">Filter by Order Status</label>
+                <select class="form-select w-100 mb-3" [(ngModel)]="selectedStatusFilter" (change)="applyFilter()">
+                    <option value="All">All</option>
+                    @for (status of statuses; track $index) {
+                    <option [value]="status">{{ status }}</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Payment Status Filter -->
+            <div>
+                <label class="form-label">Filter by Payment Status</label>
+                <select class="form-select w-100" [(ngModel)]="selectedPaymentFilter" (change)="applyFilter()">
+                    <option value="All">All</option>
+                    @for (payment of paymentStatuses; track $index) {
+                    <option [value]="payment">{{ payment }}</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="col col-md-9 p-4 border-start mt-0 bg-white rounded-end">
+            @if (loading) {
+            <div>Loading orders...</div>
+            }
+
+            @else if (!loading && filteredOrders.length === 0) {
+            <div>No orders found</div>
+            }
+
+            @if (filteredOrders.length > 0) {
+            <table class="table table-bordered table-hover text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Total Amount</th>
+                        <th>Ordered Date</th>
+                        <th>Payment Status</th>
+                        <th>Order Status</th>
+                        <th>Update Order Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (order of filteredOrders; track order.orderId) {
+                    <tr>
+                        <td>{{ order.orderId }}</td>
+                        <td class="fw-bold">{{ order.totalAmount | currency: 'INR' }}</td>
+                        <td>{{ order.orderDate | date: 'dd-MM-yyyy' }}</td>
+
+                        <td>
+                            <span class="fw-bold" [class.redText]="order.paymentStatus === 'Pending'"
+                                [class.greenText]="order.paymentStatus === 'Paid'">
+                                {{ order.paymentStatus }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="status" [class.pending]="order.status === OrderStatus.Pending"
+                                [class.confirmed]="order.status === OrderStatus.Confirmed"
+                                [class.shipped]="order.status === OrderStatus.Shipped"
+                                [class.delivered]="order.status === OrderStatus.Delivered"
+                                [class.cancelled]="order.status === OrderStatus.Cancelled">
+                                {{ order.status }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <select class="form-select" [ngModel]="order.status"
+                                (change)="onSelectChange(order, $event)">
+                                @for (status of statuses; track $index) {
+                                <option [value]="status">{{ status }}</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            }
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,66 @@
+table {
+  width: 100%;
+}
+select {
+  width: 150px;
+  display: inline-block;
+}
+
+.orders-container {
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pending {
+  background: rgb(237, 155, 2);
+  color: white;
+}
+
+.confirmed {
+  background: rgb(74, 74, 235);
+  color: white;
+}
+
+.shipped {
+  background: rgb(204, 0, 255);
+  color: white;
+}
+
+.delivered {
+  background: rgb(47, 175, 47);
+  color: white;
+}
+
+.cancelled {
+  background: rgb(255, 0, 0);
+  color: white;
+}
+
+button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.redText {
+  color: red;
+}
+
+.greenText {
+  color: green;
+}

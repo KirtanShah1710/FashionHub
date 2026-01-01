@@ -1,0 +1,152 @@
+.row> div{
+  margin: 25px 0;
+  ;
+}
+
+/* ============================= */
+/* MAIN IMAGE STYLES */
+/* ============================= */
+.main-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease-out;
+  image-rendering: crisp-edges;
+}
+
+/* ============================= */
+/* IMAGE WRAPPER */
+/* ============================= */
+
+.image-wrapper {
+  position: relative;
+  overflow: hidden; /* Hide the overflowing zoomed part */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in; /* Change cursor to indicate zoom */
+}
+
+/* ============================= */
+/* ZOOM EFFECT - CURSOR BASED */
+/* ============================= */
+
+/* Main image zoom effect: Based on the mouse position */
+.image-wrapper:hover .main-image {
+  transform: scale(3); /* Zoom in */
+  transition: transform 0.2s ease-out;
+}
+
+/* ============================= */
+/* SIZE BOX & COLOR CIRCLE */
+/* ============================= */
+
+/* Other styles for the size box, color circle, and product description can remain unchanged */
+.color-circle, .size-box {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.color-circle:hover {
+  animation: scalePulse 1s ease-in-out 0s infinite;
+  transform: scale(1.1);
+  border: 2px solid black;;
+}
+
+.color-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.color-circle.active {
+  border-color: black;
+}
+
+.color-circle.disabled {
+  opacity: 0.35;
+}
+
+/* SIZE BOX */
+.size-box {
+  min-width: 45px;
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.size-box:hover {
+  animation: none;
+  outline: 2px solid black;
+}
+
+
+.size-box.active {
+  background-color: black;
+  color: white;
+  border-color: black;
+}
+
+.size-box.disabled {
+  opacity: 0.35;
+}
+
+/* ============================= */
+/* GLOW OVERLAY EFFECT */
+/* ============================= */
+
+.image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.08), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.image-wrapper:hover::after {
+  opacity: 1;
+}
+
+/* order */
+.order-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Product description scrollable & limited to 4 lines */
+.product-description {
+  max-height: calc(1.5em * 4); /* 4 lines */
+  line-height: 1.5em;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Smooth scrollbar */
+.product-description::-webkit-scrollbar {
+  width: 4px;
+}
+
+.product-description::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 10px;
+}
+
+.product-description::-webkit-scrollbar-track {
+  background: transparent;
+}

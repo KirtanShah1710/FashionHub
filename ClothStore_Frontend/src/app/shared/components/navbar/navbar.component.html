@@ -1,0 +1,85 @@
+@if(userName){
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 fixed-top">
+  <div class="d-flex gap-3 justify-content-center align-items-center">
+    <img src="/logo.webp" alt="Logo" class="rounded-circle" style="width: 50px; height: 50px">
+    <a class="navbar-brand fw-bolder" style="letter-spacing: 5px;" routerLink="/">NUTIA</a>
+  </div>
+  
+  <div class="collapse navbar-collapse show">
+
+    <!-- LEFT SIDE LINKS -->
+    <ul class="navbar-nav me-auto">
+
+      <!-- CUSTOMER LINKS -->
+      @if(authService.isLoggedIn() && role === 'Customer'){
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/customer/products">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/customer/my-orders']">My Orders</a>
+        </li>
+      }
+
+      <!-- ADMIN LINKS -->
+      @if(authService.isLoggedIn() && role === 'Admin'){
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/customer/products']">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/products']">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/product-categories']">Categories</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/sizes']">Sizes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/colors']">Colors</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/genders']">Genders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/admin/all-orders']">Orders</a>
+        </li>
+      }
+    </ul>
+
+    <!-- RIGHT SIDE USER INFO -->
+    <ul class="navbar-nav ms-auto">
+
+      @if(!authService.isLoggedIn()){
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/auth/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/auth/register">Register</a>
+        </li>
+      }
+
+      @if(authService.isLoggedIn()){
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             href="#"
+             role="button"
+             data-bs-toggle="dropdown">
+            <span class="fw-bold text-white">{{ userName }}</span> <span class="text-warning">({{ role }})</span>
+          </a>
+
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <button class="dropdown-item" (click)="logout()">
+                Logout
+              </button>
+            </li>
+          </ul>
+        </li>
+      }
+
+    </ul>
+
+  </div>
+</nav>
+}
+

@@ -1,0 +1,63 @@
+<div class="orders-container container">
+  <h2>My Orders</h2>
+
+  @if (loading) {
+    <p>Loading orders...</p>
+  } @else {
+
+    @if (orders.length === 0) {
+      <p>No orders found.</p>
+    } @else {
+
+      <table class="table table-bordered text-center align-middle table-hover">
+        <thead>
+          <tr class="table-dark">
+            <th>Order ID</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+            <th>Payment</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (order of orders; track order.orderId) {
+            <tr>
+              <td>#{{ order.orderId }}</td>
+              <td class="fw-bold">{{ order.totalAmount | currency: 'INR' }}</td>
+
+              <td>
+                <span
+                  class="status"
+                  [class.pending]="order.status === OrderStatus.Pending"
+                  [class.confirmed]="order.status === OrderStatus.Confirmed"
+                  [class.shipped]="order.status === OrderStatus.Shipped"
+                  [class.delivered]="order.status === OrderStatus.Delivered"
+                  [class.cancelled]="order.status === OrderStatus.Cancelled">
+                  {{ order.status }}
+                </span>
+              </td>
+
+              <td>
+                <span class="fw-bold"
+                      [class.redText]="order.paymentStatus === 'Pending' "
+                      [class.greenText]="order.paymentStatus === 'Paid' "]>{{ order.paymentStatus }}</span>
+              </td>
+
+              <td>
+                @if (canCancel(order.status)) {
+                  <button (click)="cancelOrder(order.orderId)" class="btn btn-danger">
+                    Cancel
+                  </button>
+                } @else {
+                  <span>—</span>
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    }
+  }
+</div>

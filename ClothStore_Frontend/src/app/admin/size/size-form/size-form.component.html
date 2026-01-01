@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <h3 class="mb-3">{{ isEditMode ? 'Edit Size' : 'Create Size' }}</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label class="form-label">Size Name</label>
+    <input type="text" class="form-control" formControlName="name" placeholder="Enter size name" />
+
+    @if (form.controls['name'].touched && form.controls['name'].invalid) {
+      <small class="text-danger">Size name is required</small>
+    }
+
+    <button class="btn btn-primary mt-3" type="submit">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,132 @@
+<div class="container bg-light mt-5 d-grid gap-3" style="grid-template-columns: repeat(2, 1fr);">
+
+    <!-- <h3>Edit Product</h3> -->
+
+    <!-- PRODUCT FORM -->
+    <!-- PRODUCT FORM -->
+    <div class="p-3 m-1 border rounded-3">
+        <form [formGroup]="productForm" (ngSubmit)="updateProduct()">
+
+            <!-- PRODUCT NAME -->
+            <div class="mb-3">
+                <label class="form-label">Product Name</label>
+                <input type="text" class="form-control" formControlName="productName">
+            </div>
+
+            <!-- DESCRIPTION -->
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea rows="3" class="form-control" formControlName="description"></textarea>
+            </div>
+
+            <!-- CATEGORY + GENDER -->
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Product Category</label>
+                    <select class="form-select" formControlName="productCategoryId">
+                        <option value="">Select Category</option>
+                        @for(category of productCategories; track category.productCategoryId){
+                        <option [value]="category.productCategoryId">
+                            {{ category.name }}
+                        </option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Gender</label>
+                    <select class="form-select" formControlName="genderCategoryId">
+                        <option value="">Select Gender</option>
+                        @for(gender of genderCategories; track gender.genderCategoryId){
+                        <option [value]="gender.genderCategoryId">
+                            {{ gender.name }}
+                        </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
+                <div class="mb-3 w-100">
+                    <label class="form-label">Product Image</label>
+                    <input type="file" class="form-control" (change)="onImageChange($event)">
+                </div>
+
+                <!-- IMAGE PREVIEW -->
+                @if (productImagePreview) {
+                <div>
+                    <img [src]="productImagePreview" class="img-thumbnail p-0 shadow-sm" style="max-height: 150px;">
+                </div>
+                }
+            </div>
+
+            <button class="btn btn-primary">
+                Save Product
+            </button>
+        </form>
+    </div>
+
+
+    <div class="p-3 m-1 border rounded-3">
+
+
+        <!-- VARIANTS -->
+        <div class="d-flex justify-content-between mb-2">
+            <h4>Variants</h4>
+            <button class="btn btn-primary" (click)="addVariant()"><i class="bi bi-plus-circle"></i>&nbsp;Add
+                Variant</button>
+        </div>
+
+        @if (variants.length) {
+        <div class="table-scroll-wrapper mb-4">
+            <table class="table table-bordered table-hover text-center mb-0">
+                <thead>
+                    <tr class="table-dark">
+                        <th>Image</th>
+                        <th>Size</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (v of variants; track v.productVariantId) {
+                    <tr class="align-middle">
+                        <td>
+                            <img class="border rounded shadow-sm" [src]="'http://localhost:5276' + v.imageUrl"
+                                alt="Product Image" style="height: 100px; width: 100px;">
+                        </td>
+                        <td>{{ v.size }}</td>
+                        <td>
+                            <span style="width:14px;height:14px;border-radius:50%;display:inline-block"
+                                [style.background]="v.hexCode"></span>
+                            {{ v.color }}
+                        </td>
+                        <td class="text-success fw-bold">
+                            {{ v.price | currency:('INR') }}
+                        </td>
+                        <td>{{ v.stock }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-warning me-1" (click)="editVariant(v.productVariantId)">
+                                <i class="bi bi-pencil-square"></i> &nbsp;Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger" (click)="deleteVariant(v.productVariantId)">
+                                <i class="bi bi-trash"></i> &nbsp;Delete
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+
+        @if (showVariantForm) {
+        <app-product-variant-form [productId]="productId" [variantId]="editVariantId" (saved)="onVariantSaved()">
+        </app-product-variant-form>
+        }
+    </div>
+</div>

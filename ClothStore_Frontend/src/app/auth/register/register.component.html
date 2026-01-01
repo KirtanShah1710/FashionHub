@@ -1,0 +1,76 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+
+  <form [formGroup]="registerForm"
+        (ngSubmit)="onSubmit()"
+        class="border-1 rounded-5 p-5 w-50 shadow-lg">
+
+    <h2 class="text-center text-primary mb-4 fw-bolder">Register</h2>
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control" type="text" formControlName="name" />
+
+      @if(registerForm.controls['name'].touched){
+        @if(registerForm.controls['name'].hasError('required')){
+          <small class="text-danger">Name is required</small>
+        }
+      }
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input class="form-control" type="email" formControlName="email" />
+
+      @if(registerForm.controls['email'].touched){
+        @if(registerForm.controls['email'].hasError('required')){
+          <small class="text-danger">Email is required</small>
+        }
+        @if(registerForm.controls['email'].hasError('email')){
+          <small class="text-danger">Invalid email</small>
+        }
+      }
+    </div>
+
+    <!-- Age -->
+    <div class="mb-3">
+      <label class="form-label">Age</label>
+      <input class="form-control" type="number" formControlName="age" />
+
+      @if(registerForm.controls['age'].touched){
+        @if(registerForm.controls['age'].hasError('required')){
+          <small class="text-danger">Age is required</small>
+        }
+        @if(registerForm.controls['age'].hasError('min')){
+          <small class="text-danger">Age must be greater than 0</small>
+        }
+      }
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input class="form-control" type="password" formControlName="password" />
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+      <label class="form-label">Confirm Password</label>
+      <input class="form-control" type="password" formControlName="confirmPassword" />
+
+      @if(registerForm.touched){
+        @if(registerForm.hasError('passwordMismatch')){
+          <small class="text-danger">Passwords do not match</small>
+        }
+      }
+    </div>
+    <span class="text-secondary">Already have an account? <a [routerLink]="['/auth/login']" class="text-decoration-none">Login</a></span>
+    <button class="btn btn-primary w-100 mt-3"
+            type="submit"
+            [disabled]="registerForm.invalid || loading">
+      Register
+    </button>
+
+  </form>
+</div>

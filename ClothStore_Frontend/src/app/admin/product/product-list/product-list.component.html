@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-3 p-3 position-sticky bg-white"
+    style="top: 55px; box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.2);">
+    <h3>Products</h3>
+    <button class="btn btn-primary" (click)="addProduct()"><i class="bi bi-plus-circle"></i>&nbsp;Add Product</button>
+  </div>
+
+  @if (products.length) {
+  <table class="table table-bordered text-center align-middle table-hover">
+    <thead>
+      <tr class="table-dark">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Variants</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (p of products; track p.productId) {
+
+      <!-- PRODUCT ROW -->
+      <tr class="align-middle">
+        <td>
+          <img class="border shadow-sm rounded" [src]="'http://localhost:5276' + p.productImageUrl" width="80"
+            height="80" style="object-fit: cover;">
+        </td>
+        <td>{{ p.productName }}</td>
+        <td>{{ p.productCategory }}</td>
+
+        <!-- VARIANTS SUBTABLE -->
+        <td class="p-2">
+          @if (p.variants?.length) {
+          <div class="variant-table-wrapper">
+            <table class="table table-bordered mb-0 variant-table table-light table-striped">
+              <tbody>
+                @for (v of p.variants; track v.productVariantId) {
+                <tr>
+                  <td>
+                    <img [src]="'http://localhost:5276' + v.imageUrl" width="35" height="35" style="object-fit: cover;"
+                      class="rounded">
+                  </td>
+                  <td>{{ v.size }}</td>
+                  <td>
+                    <span style="width:12px;height:12px;border-radius:50%;display:inline-block"
+                      [style.background]="v.hexCode"></span>
+                    {{ v.color }}
+                  </td>
+                  <td class="fw-bold text-success">
+                    {{ v.price | currency:('INR') }}
+                  </td>
+                  <td>{{ v.stock }}</td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+          } @else {
+          <span class="text-danger">No variants</span>
+          }
+        </td>
+
+        <!-- ACTIONS -->
+        <td class="product-actions">
+          <button class="btn btn-sm btn-warning me-1" (click)="editProduct(p.productId)"><i class="bi bi-pencil-square"></i> &nbsp;Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.productId)"><i class="bi bi-trash"></i> &nbsp;Delete</button>
+        </td>
+      </tr>
+
+      }
+    </tbody>
+  </table>
+  }
+
+  @if (!products.length) {
+  <p>No products found.</p>
+  }
+
+</div>

@@ -1,0 +1,169 @@
+/* ================= SEARCH BAR ================= */
+.search-bar {
+  position: sticky;
+  top: 55px;
+  z-index: 20;
+  margin-top: 65px;
+  box-shadow: 0 4px 6px -2px rgba(0,0,0,.2);
+}
+
+/* ================= MAIN WRAPPER ================= */
+.products-wrapper {
+  margin-top: 24px;            /* GAP under search */
+  position: sticky;
+  top: 130px;                  /* search height + gap */
+  z-index: 10;
+}
+
+/* ================= MAIN ROW ================= */
+.main-row {
+  height: calc(100vh - 180px);
+  background: #fff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  position: sticky;
+  top: 0;
+  /* min-height: 100%; */
+  height: calc(100vh - 180px);
+  overflow-y: scroll;
+  padding: 20px;
+  background: #f9fafb;
+  border-right: 1px solid #ddd;
+}
+
+
+
+/* ================= CONTENT ================= */
+.content {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* ================= FILTER ================= */
+.filter-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.card{
+    border-radius: 20px;
+    overflow: hidden;
+}
+.product-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+}
+
+/* ================= IMAGE ================= */
+.product-image-wrapper {
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.product-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ================= FOOTER ================= */
+.card-footer {
+  padding-top: 0;
+}
+
+.size-pDetail{
+    border: 1px solid #ddd;
+}
+
+.color-pDetail, .size-pDetail{
+    cursor: pointer;
+}
+
+.color-pDetail:hover, .size-pDetail:hover{
+    transform: scale(1.2);
+    border: 1px solid black;
+    border-color: black;
+}
+
+/* ==================== Range ==================== */
+.range-wrapper {
+  position: relative;
+  height: 40px;
+}
+
+/* base track */
+.range-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: #dee2e6;
+  border-radius: 10px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* selected range */
+.range-fill {
+  position: absolute;
+  top: 50%;
+  height: 6px;
+  background: rgb(142, 140, 140);
+  border-radius: 10px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* range inputs */
+.range-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 40px;
+  pointer-events: none;
+  background: none;
+  z-index: 3;
+}
+
+/* 🔥 HIDE NATIVE TRACK (IMPORTANT) */
+.range-input::-webkit-slider-runnable-track {
+  background: transparent;
+  border: none;
+}
+
+.range-input::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
+/* enable thumb interaction */
+.range-input::-webkit-slider-thumb {
+  pointer-events: auto;
+  position: relative;
+  z-index: 4;
+  background-color: rgb(103, 101, 101);
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+}
+
+.range-input::-moz-range-thumb {
+  pointer-events: auto;
+  position: relative;
+  z-index: 4;
+}

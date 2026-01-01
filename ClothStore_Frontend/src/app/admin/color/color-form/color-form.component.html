@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <h3 class="mb-3">{{ isEditMode ? 'Edit Color' : 'Add Color' }}</h3>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label class="form-label">Color Name</label>
+    <input type="text" class="form-control" formControlName="name" placeholder="Enter color name" />
+    @if(form.controls['name'].touched && form.controls['name'].invalid) {
+      <small class="text-danger">Name is required</small>
+    }
+
+    <label class="form-label mt-3">Hex Code</label>
+    <input type="color" class="form-control form-control-color" formControlName="hexCode" />
+    <div class="mt-2">
+      <span>Preview:</span>
+      <span class="rounded-circle d-inline-block" [style.background]="form.value.hexCode" style="width: 25px; height: 25px;"></span>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+  </form>
+</div>

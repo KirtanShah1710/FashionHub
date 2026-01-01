@@ -1,0 +1,26 @@
+.table-scroll-wrapper {
+  max-height: 280px; /* ~3 rows (100px image + padding) */
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+}
+
+/* Keep header fixed */
+.table-scroll-wrapper thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Smooth scrollbar */
+.table-scroll-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 6px;
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}

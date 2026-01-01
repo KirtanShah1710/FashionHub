@@ -1,0 +1,69 @@
+<div class="container mt-4">
+  <h3>Create Product</h3>
+
+  <form [formGroup]="productForm" (ngSubmit)="submit()" class="bg-light border rounded p-3">
+
+    <!-- PRODUCT NAME -->
+    <div class="mb-3">
+      <label class="form-label">Product Name</label>
+      <input type="text" class="form-control" formControlName="productName">
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea class="form-control" rows="3" formControlName="description"></textarea>
+    </div>
+
+    <!-- CATEGORY -->
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Product Category</label>
+        <select class="form-select" formControlName="productCategoryId">
+          <option value="">Select Category</option>
+          @for (category of productCategories; track category.productCategoryId) {
+            <option [value]="category.productCategoryId">{{ category.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="form-label">Gender</label>
+        <select class="form-select" formControlName="genderCategoryId">
+          <option value="">Select Gender</option>
+          @for (gender of genderCategories; track gender.genderCategoryId) {
+            <option [value]="gender.genderCategoryId">{{ gender.name }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <!-- IMAGE -->
+    <div class="mb-3">
+      <label class="form-label">Product Image</label>
+      <input type="file" class="form-control" (change)="onImageChange($event)">
+    </div>
+
+    <!-- IMAGE PREVIEW -->
+    @if (productImagePreview) {
+      <div class="mb-3">
+        <img [src]="productImagePreview"
+             class="img-thumbnail"
+             style="max-height: 200px;">
+      </div>
+    }
+
+    <!-- SUBMIT -->
+    <button class="btn btn-primary" [disabled]="isSubmitting">
+      Create Product
+    </button>
+
+  </form>
+
+  <!-- VARIANT SECTION -->
+  @if (createdProductId) {
+    <hr>
+    <h4>Product Variants</h4>
+    <app-product-variant-form [productId]="createdProductId"></app-product-variant-form>
+  }
+</div>

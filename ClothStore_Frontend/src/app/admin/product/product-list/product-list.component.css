@@ -1,0 +1,40 @@
+.variant-table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.variant-table td {
+  /* width: 100%; 6 columns → 100 / 6 */
+  vertical-align: middle;
+  text-align: center;
+}
+
+.variant-table img {
+  display: block;
+  margin: auto;
+}
+
+.product-actions {
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+.variant-table-wrapper {
+  max-height: 150px; /* ~3 rows for 35px images */
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+}
+
+/* Smooth scrollbar */
+.variant-table-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.variant-table-wrapper::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 6px;
+}
+
+.variant-table-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}

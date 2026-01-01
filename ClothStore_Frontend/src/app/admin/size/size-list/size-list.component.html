@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3 p-3 position-sticky bg-white" style="top: 55px; box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.2);">
+    <h3>Sizes</h3>
+    <button class="btn btn-primary" (click)="create()"><i class="bi bi-plus-circle"></i>&nbsp;Add New Size</button>
+  </div>
+
+  @if(!loading && sizes.length) {
+    <table class="table table-bordered text-center table-hover">
+      <thead>
+        <tr class="table-dark">
+          <th>#</th>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (size of sizes; track size.sizeId) {
+          <tr>
+            <td>{{  size.sizeId }}</td>
+            <td>{{ size.name }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="edit(size.sizeId!)"><i class="bi bi-pencil-square"></i> &nbsp;Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="delete(size.sizeId!)"><i class="bi bi-trash"></i> &nbsp;Delete</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+
+  @if(!loading && sizes.length === 0) {
+    <p class="text-center">No sizes found.</p>
+  }
+
+  @if(loading) {
+    <p class="text-center">Loading...</p>
+  }
+</div>

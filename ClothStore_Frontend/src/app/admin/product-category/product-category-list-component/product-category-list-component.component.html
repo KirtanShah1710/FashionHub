@@ -1,0 +1,40 @@
+<div class="container mt-4">
+
+  <div class="d-flex justify-content-between mb-3 p-3 position-sticky bg-white" style="top: 55px; box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.2);">
+    <h3>Product Categories</h3>
+    <a routerLink="/admin/product-categories/create"
+       class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i>&nbsp;Add Category
+    </a>
+  </div>
+
+  <table class="table table-bordered text-center table-hover">
+    <thead>
+      <tr class="table-dark">
+        <th>#</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for(cat of categories; track cat.productCategoryId) {
+        <tr>
+          <td>{{ cat.productCategoryId }}</td>
+          <td>{{ cat.name }}</td>
+          <td>
+            <a class="btn btn-sm btn-warning me-2"
+               [routerLink]="['/admin/product-categories/edit', cat.productCategoryId]">
+              <i class="bi bi-pencil-square"></i> &nbsp;Edit
+            </a>
+            <button class="btn btn-sm btn-danger"
+                    (click)="delete(cat.productCategoryId)">
+              <i class="bi bi-trash"></i> &nbsp;Delete
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>

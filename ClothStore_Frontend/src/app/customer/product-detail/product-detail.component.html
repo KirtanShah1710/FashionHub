@@ -1,0 +1,79 @@
+<div class="container" style="margin-top: 160px ;">
+
+  @if (product && selectedVariant) {
+
+  <div class="row g-5 bg-light rounded-3 border">
+
+    <!-- MAIN IMAGE -->
+    <div class="col-md-4 border-end d-flex align-items-center justify-content-center">
+      <div class="image-wrapper rounded-3" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()">
+        <img class="main-image" [src]="imageBaseUrl + selectedVariant.imageUrl" alt="Product Image"
+          [ngStyle]="{ 'transform-origin': currentTransformOrigin }" />
+      </div>
+    </div>
+
+    <!-- PRODUCT INFO -->
+    <div class="col-md-4 border-end d-flex justify-content-center align-items-start flex-column">
+
+      <h4 class="fw-bold">{{ product.productName }}</h4>
+      <p class="text-muted  product-description">{{ product.description }}</p>
+
+      <h5 class="text-success mb-3 fw-bold">
+        {{ selectedVariant.price | currency:('INR') }}
+      </h5>
+
+      <!-- COLORS -->
+      <h6>Colors</h6>
+      <div class="d-flex gap-2 flex-wrap mb-4">
+        @for (c of colors; track c) {
+        <div class="color-circle" [class.active]="c === selectedColor" [class.disabled]="!isColorAvailable(c)"
+          (click)="selectColor(c)">
+          <img [src]="getImageByColor(c)" />
+        </div>
+        }
+      </div>
+
+      <!-- SIZES -->
+      <h6>Sizes</h6>
+      <div class="d-flex gap-2 flex-wrap">
+        @for (s of sizes; track s) {
+        <div class="size-box" [class.active]="s === selectedSize" [class.disabled]="!isSizeAvailable(s)"
+          (click)="selectSize(s)">
+          {{ s }}
+        </div>
+        }
+      </div>
+
+    </div>
+    <div class="col col-md-4 d-flex flex-column justify-content-center">
+      <!-- Quantity Section -->
+      <div class="mb-1" style="width: fit-content;">
+        <button class="btn btn-dark me-2" (click)="decreaseQty()" [disabled]="quantity === 1"><i class="bi bi-dash-lg"></i></button>
+
+        <span class="fw-bold">{{ quantity }}</span>
+
+        <button class="btn btn-dark ms-2" (click)="increaseQty()"
+          [disabled]="selectedVariant && quantity === selectedVariant.stock">
+          <i class="bi bi-plus-lg"></i>
+        </button>
+      </div>
+
+      <!-- Price Calculation -->
+      <div class="price-section" *ngIf="selectedVariant">
+        <p class="text-muted">Price per item: {{ selectedVariant.price | currency:('INR')}}</p>
+        <p class="fs-5 fw-medium">Total: &nbsp; <span class="text-success fw-bold">{{ totalAmount |
+            currency:('INR')}}</span></p>
+      </div>
+
+      <!-- Place Order Button -->
+      <button class="order-btn btn btn-dark fw-bolder" style="width: fit-content;"
+        [disabled]="!selectedVariant || selectedVariant.stock === 0" (click)="placeOrder()">
+        <i class="bi bi-bag-fill"></i>&nbsp; Place Order
+      </button>
+
+    </div>
+  </div>
+  } @else {
+  <p class="text-center text-muted">Loading product...</p>
+  }
+</div>
