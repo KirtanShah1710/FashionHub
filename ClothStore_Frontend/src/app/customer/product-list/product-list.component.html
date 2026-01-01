@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <!-- 🔍 STICKY SEARCH BAR -->
+  <!-- STICKY SEARCH BAR -->
   <div class="search-bar rounded-pill input-group">
     <span class="input-group-text rounded-start-4">
       <i class="bi bi-search"></i>
@@ -8,7 +8,7 @@
       [(ngModel)]="filters.search" (input)="onSearchChange()" />
   </div>
 
-  <!-- 📦 MAIN WRAPPER -->
+  <!-- MAIN WRAPPER -->
   <div class="products-wrapper">
     <div class="row g-0 main-row shadow-sm">
       <!-- ================= LEFT FILTERS ================= -->
@@ -20,13 +20,20 @@
             <span>Category</span>&nbsp;
             <i [class]="isCollapsed['category'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
           </h6>
-          <div *ngIf="!isCollapsed['category']">
-            <div class="form-check" *ngFor="let c of categories">
-              <input class="form-check-input" type="checkbox"
-                (change)="toggleArray(filters.productCategoryId, c.productCategoryId, $any($event.target).checked)">
-              <label class="form-check-label">{{ c.name }}</label>
+          @if(!isCollapsed['category'])
+          {
+            <div>
+              @for(c of categories; track c.productCategoryId)
+              {
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"
+                    (change)="toggleArray(filters.productCategoryId, c.productCategoryId, $any($event.target).checked)">
+                  <label class="form-check-label">{{ c.name }}</label>
+                </div>
+              }
             </div>
-          </div>
+          }
+
         </div>
 
 
@@ -37,13 +44,19 @@
             <span>Gender</span>&nbsp;
             <i [class]="isCollapsed['gender'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
           </h6>
-          <div *ngIf="!isCollapsed['gender']">
-            <div class="form-check" *ngFor="let g of genders">
-              <input class="form-check-input" type="checkbox"
-                (change)="toggleArray(filters.genderCategoryId, g.genderCategoryId, $any($event.target).checked)">
-              <label class="form-check-label">{{ g.name }}</label>
+          @if(!isCollapsed['gender'])
+          {
+            <div>
+              @for(g of genders; track g.genderId)
+              {
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"
+                    (change)="toggleArray(filters.genderCategoryId, g.genderCategoryId, $any($event.target).checked)">
+                  <label class="form-check-label">{{ g.name }}</label>
+                </div>
+              }
             </div>
-          </div>
+          }
         </div>
 
 
@@ -54,13 +67,20 @@
             <span>Size</span>&nbsp;
             <i [class]="isCollapsed['size'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
           </h6>
-          <div *ngIf="!isCollapsed['size']">
-            <div class="form-check" *ngFor="let s of sizes">
-              <input class="form-check-input" type="checkbox"
-                (change)="toggleArray(filters.sizeId, s.sizeId, $any($event.target).checked)">
-              <label class="form-check-label">{{ s.name }}</label>
+          @if(!isCollapsed['size'])
+          {
+            <div>
+              @for(s of sizes; track s.sizeId)
+              {
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"
+                    (change)="toggleArray(filters.sizeId, s.sizeId, $any($event.target).checked)">
+                  <label class="form-check-label">{{ s.name }}</label>
+                </div>
+              }
             </div>
-          </div>
+          }
+
         </div>
 
 
@@ -71,16 +91,22 @@
             <span>Color</span>&nbsp;
             <i [class]="isCollapsed['color'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
           </h6>
-          <div *ngIf="!isCollapsed['color']">
-            <div class="form-check" *ngFor="let c of colors">
-              <input class="form-check-input" type="checkbox"
-                (change)="toggleArray(filters.colorId, c.colorId, $any($event.target).checked)">
-              <div class="d-flex gap-2 align-items-center">
-                <div [style.background-color]="c.hexCode" style="width: 15px; height: 15px; border-radius: 50%;"></div>
-                <label class="form-check-label">{{ c.name }}</label>
-              </div>
+          @if(!isCollapsed['color'])
+          {
+            <div>
+              @for(c of colors; track c.colorId)
+              {
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox"
+                    (change)="toggleArray(filters.colorId, c.colorId, $any($event.target).checked)">
+                  <div class="d-flex gap-2 align-items-center">
+                    <div [style.background-color]="c.hexCode" style="width: 15px; height: 15px; border-radius: 50%;"></div>
+                    <label class="form-check-label">{{ c.name }}</label>
+                  </div>
+                </div>
+              }
             </div>
-          </div>
+          }
         </div>
 
 
@@ -113,61 +139,73 @@
 
       <!-- ================= RIGHT PRODUCT GRID ================= -->
       <div class="col-md-9 content">
-        <ng-container *ngIf="products.length; else noProducts">
+        @if(products.length)
+        {
           <div class="row g-3">
-            <div class="col-md-4" *ngFor="let p of products">
-              <div class="card product-card h-100 d-flex flex-column">
-                <!-- IMAGE -->
-                <div class="product-image-wrapper">
-                  <img [src]="imageBaseUrl + p.imageUrl" alt="product" />
-                </div>
-
-                <!-- BODY -->
-                <div class="card-body flex-grow-1">
-                  <!-- COLOR LIST -->
-                  <div class="d-flex gap-2 justify-content-start mb-3">
-                    <div class="rounded-circle overflow-hidden color-pDetail"
-                      style="width: 40px; height: 40px; cursor:pointer;" *ngFor="let c of p.availableColors"
-                      (click)="goToDetail(p.productId, c.name, p.size)">
-                      <img [src]="imageBaseUrl + c.hexCode" class="w-100 h-100" style="object-fit: contain;" />
-                    </div>
+            @for(p of products; track p.productId)
+            {
+              <div class="col-md-4">
+                <div class="card product-card h-100 d-flex flex-column">
+                  <!-- IMAGE -->
+                  <div class="product-image-wrapper">
+                    <img [src]="imageBaseUrl + p.imageUrl" alt="product" />
                   </div>
 
-                  <!-- SIZE LIST -->
-                  <div class="d-flex gap-2 justify-content-start mb-3">
-                    <div class="rounded d-flex align-items-center justify-content-center size-pDetail"
-                      style="width: 30px; height: 30px; cursor:pointer;" *ngFor="let s of p.availableSizes"
-                      (click)="goToDetail(p.productId, p.color, s.name)">
-                      {{ s.name }}
+                  <!-- BODY -->
+                  <div class="card-body flex-grow-1">
+                    <!-- COLOR LIST -->
+                    <div class="d-flex gap-2 justify-content-start mb-3">
+                      @for(c of p.availableColors; track c.colorId)
+                      {
+                        <div class="rounded-circle overflow-hidden color-pDetail"
+                          style="width: 40px; height: 40px; cursor:pointer;"
+                          (click)="goToDetail(p.productId, c.name, p.size)">
+                          <img [src]="imageBaseUrl + c.hexCode" class="w-100 h-100" style="object-fit: contain;" />
+                        </div>
+                      }
                     </div>
+
+                    <!-- SIZE LIST -->
+                    <div class="d-flex gap-2 justify-content-start mb-3">
+                      @for(s of p.availableSizes; track s.sizeId)
+                      {
+                        <div class="rounded d-flex align-items-center justify-content-center size-pDetail"
+                          style="width: 30px; height: 30px; cursor:pointer;"
+                          (click)="goToDetail(p.productId, p.color, s.name)">
+                          {{ s.name }}
+                        </div>
+                      }
+
+                    </div>
+
+                    <h6 class="mb-1 fw-bold">
+                      {{ p.productName }}
+                    </h6>
+
+                    <p class="fw-bold text-success mb-0">
+                      ₹ {{ p.price }}
+                    </p>
                   </div>
 
-                  <h6 class="mb-1 fw-bold">
-                    {{ p.productName }}
-                  </h6>
-
-                  <p class="fw-bold text-success mb-0">
-                    ₹ {{ p.price }}
-                  </p>
-                </div>
-
-                <!-- FOOTER -->
-                <div class="card-footer bg-white border-0 mt-auto">
-                  <button class="btn btn-outline-primary btn-sm w-100 mb-2 rounded-pill"
-                    [routerLink]="['/customer/products', p.productId]">
-                    View Details
-                  </button>
+                  <!-- FOOTER -->
+                  <div class="card-footer bg-white border-0 mt-auto">
+                    <button class="btn btn-outline-primary btn-sm w-100 mb-2 rounded-pill"
+                      [routerLink]="['/customer/products', p.productId]">
+                      View Details
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            }
           </div>
-        </ng-container>
-
-        <ng-template #noProducts>
+        }
+        @else{
+        <div>
           <p class="text-center text-muted mt-5">
             No products found
           </p>
-        </ng-template>
+        </div>
+        }
       </div>
     </div>
   </div>
