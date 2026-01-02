@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-
 import { ProductCatalogService } from '../../shared/services/product-catalog.service';
 import { GenderService } from '../../shared/services/gender.service';
 import { ColorService } from '../../shared/services/color.service';
 import { SizeService } from '../../shared/services/size.service';
 import { ProductCategorService } from '../../shared/services/product-categor.service';
-import { CommonModule } from '@angular/common';
 import { ProductVariantService } from '../../shared/services/product-variant.service';
+import { CurrencyPipe, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [FormsModule, RouterLink, CommonModule],
+  imports: [FormsModule, RouterLink, CurrencyPipe, JsonPipe],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
@@ -89,6 +88,8 @@ export class ProductListComponent implements OnInit {
 
   // ===== LOAD CATALOG =====
   loadCatalog(): void {
+    console.log(this.products);
+    
     this.catalogService.getCatalog(this.filters).subscribe(res => {
       this.products = res.data;
       this.meta = res.meta;

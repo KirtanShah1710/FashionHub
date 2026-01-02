@@ -4,14 +4,16 @@
   top: 55px;
   z-index: 20;
   margin-top: 65px;
-  box-shadow: 0 4px 6px -2px rgba(0,0,0,.2);
+  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, .2);
 }
 
 /* ================= MAIN WRAPPER ================= */
 .products-wrapper {
-  margin-top: 24px;            /* GAP under search */
+  margin-top: 24px;
+  /* GAP under search */
   position: sticky;
-  top: 130px;                  /* search height + gap */
+  top: 130px;
+  /* search height + gap */
   z-index: 10;
 }
 
@@ -53,17 +55,18 @@
 
 /* ================= PRODUCT CARD ================= */
 
-.card{
-    border-radius: 20px;
-    overflow: hidden;
+.card {
+  border-radius: 20px;
+  overflow: hidden;
 }
+
 .product-card {
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0,0,0,.15);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .15);
 }
 
 /* ================= IMAGE ================= */
@@ -87,18 +90,26 @@
   padding-top: 0;
 }
 
-.size-pDetail{
-    border: 1px solid #ddd;
+.size-pDetail {
+  border: 1px solid #ddd;
 }
 
-.color-pDetail, .size-pDetail{
-    cursor: pointer;
+.color-pDetail,
+.size-pDetail {
+  cursor: pointer;
 }
 
-.color-pDetail:hover, .size-pDetail:hover{
-    transform: scale(1.2);
-    border: 1px solid black;
-    border-color: black;
+.size-pDetail:hover{
+  transform: scale(1.18);
+  border: 1px solid rgb(105, 104, 104);
+  background-color: #6c757d !important;
+  color: white;
+}
+
+.color-pDetail:hover {
+  transform: scale(1.2);
+  border: 1px solid black;
+  border-color: black;
 }
 
 /* ==================== Range ==================== */
@@ -125,7 +136,8 @@
   position: absolute;
   top: 50%;
   height: 6px;
-  background: rgb(142, 140, 140);
+  /* background: rgb(142, 140, 140); */
+  background: #6c757d;
   border-radius: 10px;
   transform: translateY(-50%);
   z-index: 2;
@@ -158,8 +170,8 @@
   pointer-events: auto;
   position: relative;
   z-index: 4;
-  background-color: rgb(103, 101, 101);
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.5);
+  background-color: #6c757d;
+  box-shadow: 0px 0px 0.50rem rgba(0, 0, 0, 0.5);
 }
 
 .range-input::-moz-range-thumb {
@@ -167,3 +179,18 @@
   position: relative;
   z-index: 4;
 }
+
+.form-check-input:checked {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.form-check-input:focus {
+  border-color: #6c757d;
+  box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+.form-check-input:hover {
+  border-color: #6c757d;
+}
+

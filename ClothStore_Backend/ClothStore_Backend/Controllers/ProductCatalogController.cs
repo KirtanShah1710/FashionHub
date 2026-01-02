@@ -1,6 +1,5 @@
 ﻿using ClothStore_Backend.Application.DTOs.RequestDto;
 using ClothStore_Backend.Application.IService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClothStore_Backend.API.Controllers

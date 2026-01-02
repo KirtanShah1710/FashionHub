@@ -3,7 +3,6 @@ using ClothStore_Backend.Data.Entities;
 using ClothStore_Backend.Data.IRepository;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace ClothStore_Backend.Data.Repository
 {
     public class SizeRepository : ISizeRepository

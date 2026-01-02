@@ -1,10 +1,5 @@
 ﻿using ClothStore_Backend.Application.DTOs.RequestDto;
 using ClothStore_Backend.Application.DTOs.ResponseDto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClothStore_Backend.Application.IService
 {

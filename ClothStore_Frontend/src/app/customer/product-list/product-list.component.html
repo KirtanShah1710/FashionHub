@@ -16,22 +16,23 @@
 
         <!-- CATEGORY -->
         <div class="p-1 mb-2 rounded">
-          <h6 class="filter-title" (click)="toggleFilter('category')">
+          <h6 class="filter-title text-secondary fw-bold" (click)="toggleFilter('category')">
             <span>Category</span>&nbsp;
-            <i [class]="isCollapsed['category'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
+            <i
+              [class]="isCollapsed['category'] ? 'bi bi-caret-down-fill text-secondary' : 'bi bi-caret-up-fill text-secondary'"></i>
           </h6>
           @if(!isCollapsed['category'])
           {
-            <div>
-              @for(c of categories; track c.productCategoryId)
-              {
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox"
-                    (change)="toggleArray(filters.productCategoryId, c.productCategoryId, $any($event.target).checked)">
-                  <label class="form-check-label">{{ c.name }}</label>
-                </div>
-              }
+          <div>
+            @for(c of categories; track c.productCategoryId)
+            {
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                (change)="toggleArray(filters.productCategoryId, c.productCategoryId, $any($event.target).checked)">
+              <label class="form-check-label text-secondary fw-medium">{{ c.name }}</label>
             </div>
+            }
+          </div>
           }
 
         </div>
@@ -40,22 +41,23 @@
 
         <!-- GENDER -->
         <div class="p-1 mb-2">
-          <h6 class="filter-title" (click)="toggleFilter('gender')">
+          <h6 class="filter-title text-secondary fw-bold" (click)="toggleFilter('gender')">
             <span>Gender</span>&nbsp;
-            <i [class]="isCollapsed['gender'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
+            <i
+              [class]="isCollapsed['gender'] ? 'bi bi-caret-down-fill text-secondary' : 'bi bi-caret-up-fill text-secondary'"></i>
           </h6>
           @if(!isCollapsed['gender'])
           {
-            <div>
-              @for(g of genders; track g.genderId)
-              {
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox"
-                    (change)="toggleArray(filters.genderCategoryId, g.genderCategoryId, $any($event.target).checked)">
-                  <label class="form-check-label">{{ g.name }}</label>
-                </div>
-              }
+          <div>
+            @for(g of genders; track g.genderId)
+            {
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                (change)="toggleArray(filters.genderCategoryId, g.genderCategoryId, $any($event.target).checked)">
+              <label class="form-check-label text-secondary fw-medium">{{ g.name }}</label>
             </div>
+            }
+          </div>
           }
         </div>
 
@@ -63,22 +65,22 @@
 
         <!-- SIZE -->
         <div class="p-1 mb-2">
-          <h6 class="filter-title" (click)="toggleFilter('size')">
+          <h6 class="filter-title text-secondary fw-bold" (click)="toggleFilter('size')">
             <span>Size</span>&nbsp;
-            <i [class]="isCollapsed['size'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
+            <i [class]="isCollapsed['size'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill text-secondary'"></i>
           </h6>
           @if(!isCollapsed['size'])
           {
-            <div>
-              @for(s of sizes; track s.sizeId)
-              {
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox"
-                    (change)="toggleArray(filters.sizeId, s.sizeId, $any($event.target).checked)">
-                  <label class="form-check-label">{{ s.name }}</label>
-                </div>
-              }
+          <div>
+            @for(s of sizes; track s.sizeId)
+            {
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                (change)="toggleArray(filters.sizeId, s.sizeId, $any($event.target).checked)">
+              <label class="form-check-label  text-secondary fw-medium">{{ s.name }}</label>
             </div>
+            }
+          </div>
           }
 
         </div>
@@ -87,52 +89,55 @@
 
         <!-- COLOR -->
         <div class="p-1 mb-2">
-          <h6 class="filter-title" (click)="toggleFilter('color')">
+          <h6 class="filter-title text-secondary fw-bold" (click)="toggleFilter('color')">
             <span>Color</span>&nbsp;
-            <i [class]="isCollapsed['color'] ? 'bi bi-caret-down-fill' : 'bi bi-caret-up-fill'"></i>
+            <i
+              [class]="isCollapsed['color'] ? 'bi bi-caret-down-fill text-secondary' : 'bi bi-caret-up-fill text-secondary'"></i>
           </h6>
           @if(!isCollapsed['color'])
           {
-            <div>
-              @for(c of colors; track c.colorId)
-              {
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox"
-                    (change)="toggleArray(filters.colorId, c.colorId, $any($event.target).checked)">
-                  <div class="d-flex gap-2 align-items-center">
-                    <div [style.background-color]="c.hexCode" style="width: 15px; height: 15px; border-radius: 50%;"></div>
-                    <label class="form-check-label">{{ c.name }}</label>
-                  </div>
-                </div>
-              }
+          <div>
+            @for(c of colors; track c.colorId)
+            {
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                (change)="toggleArray(filters.colorId, c.colorId, $any($event.target).checked)">
+              <div class="d-flex gap-2 align-items-center">
+                <div [style.background-color]="c.hexCode" style="width: 15px; height: 15px; border-radius: 50%;"
+                  class="border border-1 border-black"></div>
+                <label class="form-check-label text-secondary fw-medium">{{ c.name }}</label>
+              </div>
             </div>
+            }
+          </div>
           }
         </div>
 
 
 
         <!-- PRICE RANGE -->
-        <h6 class="filter-title">Price Range</h6>
+        <h6 class="filter-title text-secondary fw-bold">Price Range</h6>
 
         <div class="range-wrapper">
-          <div class="small text-muted mt-0 mb-5">
-            <span>{{ filters.minPrice | currency:('INR') }} - {{ filters.maxPrice | currency:('INR') }}</span>
-          </div>
           <!-- background track -->
-          <div class="range-track mt-3"></div>
+          <div class="range-track"></div>
 
           <!-- selected range -->
-          <div class="range-fill mt-3" [style.left.%]="minPercent" [style.width.%]="maxPercent - minPercent">
+          <div class="range-fill" [style.left.%]="minPercent" [style.width.%]="maxPercent - minPercent">
           </div>
 
           <!-- MIN -->
-          <input type="range" class="form-range range-input mt-3" min="0" [max]="maxPrice" step="100"
+          <input type="range" class="form-range range-input" min="0" [max]="maxPrice" step="100"
             [(ngModel)]="filters.minPrice" (input)="onPriceChange()" />
 
-          <input type="range" class="form-range range-input mt-3" min="0" [max]="maxPrice" step="100"
+          <input type="range" class="form-range range-input" min="0" [max]="maxPrice" step="100"
             [(ngModel)]="filters.maxPrice" (input)="onPriceChange()" />
-
         </div>
+        @if(filters.minPrice || filters.maxPrice){
+        <div class="small text-muted mt-0 text-secondary fw-medium">
+          <span>{{ filters.minPrice | currency:('INR') }} - {{ filters.maxPrice | currency:('INR') }}</span>
+        </div>
+        }
 
         <button class="btn btn-secondary mt-3" (click)="resetPriceRange()">Reset Price</button>
       </div>
@@ -141,63 +146,64 @@
       <div class="col-md-9 content">
         @if(products.length)
         {
-          <div class="row g-3">
-            @for(p of products; track p.productId)
-            {
-              <div class="col-md-4">
-                <div class="card product-card h-100 d-flex flex-column">
-                  <!-- IMAGE -->
-                  <div class="product-image-wrapper">
-                    <img [src]="imageBaseUrl + p.imageUrl" alt="product" />
-                  </div>
-
-                  <!-- BODY -->
-                  <div class="card-body flex-grow-1">
-                    <!-- COLOR LIST -->
-                    <div class="d-flex gap-2 justify-content-start mb-3">
-                      @for(c of p.availableColors; track c.colorId)
-                      {
-                        <div class="rounded-circle overflow-hidden color-pDetail"
-                          style="width: 40px; height: 40px; cursor:pointer;"
-                          (click)="goToDetail(p.productId, c.name, p.size)">
-                          <img [src]="imageBaseUrl + c.hexCode" class="w-100 h-100" style="object-fit: contain;" />
-                        </div>
-                      }
-                    </div>
-
-                    <!-- SIZE LIST -->
-                    <div class="d-flex gap-2 justify-content-start mb-3">
-                      @for(s of p.availableSizes; track s.sizeId)
-                      {
-                        <div class="rounded d-flex align-items-center justify-content-center size-pDetail"
-                          style="width: 30px; height: 30px; cursor:pointer;"
-                          (click)="goToDetail(p.productId, p.color, s.name)">
-                          {{ s.name }}
-                        </div>
-                      }
-
-                    </div>
-
-                    <h6 class="mb-1 fw-bold">
-                      {{ p.productName }}
-                    </h6>
-
-                    <p class="fw-bold text-success mb-0">
-                      ₹ {{ p.price }}
-                    </p>
-                  </div>
-
-                  <!-- FOOTER -->
-                  <div class="card-footer bg-white border-0 mt-auto">
-                    <button class="btn btn-outline-primary btn-sm w-100 mb-2 rounded-pill"
-                      [routerLink]="['/customer/products', p.productId]">
-                      View Details
-                    </button>
-                  </div>
-                </div>
+        <div class="row g-3">
+          <p>{{products | json}}</p>
+          @for(p of products; track p.productId)
+          {
+          <div class="col-md-4">
+            <div class="card product-card h-100 d-flex flex-column">
+              <!-- IMAGE -->
+              <div class="product-image-wrapper">
+                <img [src]="imageBaseUrl + p.imageUrl" alt="product" />
               </div>
-            }
+
+              <!-- BODY -->
+              <div class="card-body flex-grow-1">
+                <!-- COLOR LIST -->
+                <div class="d-flex gap-2 justify-content-start mb-3">
+                  @for(c of p.availableColors; track c.colorId)
+                  {
+                  <div class="rounded-circle overflow-hidden color-pDetail"
+                    style="width: 40px; height: 40px; cursor:pointer;"
+                    (click)="goToDetail(p.productId, c.name, p.size)">
+                    <img [src]="imageBaseUrl + c.hexCode" class="w-100 h-100" style="object-fit: contain;" />
+                  </div>
+                  }
+                </div>
+
+                <!-- SIZE LIST -->
+                <div class="d-flex gap-2 justify-content-start mb-3">
+                  @for(s of p.availableSizes; track s.sizeId)
+                  {
+                  <div class="rounded d-flex align-items-center justify-content-center size-pDetail bg-light"
+                    style="width: 30px; height: 30px; cursor:pointer;"
+                    (click)="goToDetail(p.productId, p.color, s.name)">
+                    {{ s.name }}
+                  </div>
+                  }
+
+                </div>
+
+                <h6 class="mb-1 fw-bold">
+                  {{ p.productName }}
+                </h6>
+
+                <p class="fw-bold text-success mb-0">
+                  ₹ {{ p.price }}
+                </p>
+              </div>
+
+              <!-- FOOTER -->
+              <div class="card-footer bg-white border-0 mt-auto">
+                <button class="btn btn-outline-secondary fw-bold btn-sm w-100 mb-2 rounded-pill"
+                  [routerLink]="['/customer/products', p.productId]">
+                  View Details
+                </button>
+              </div>
+            </div>
           </div>
+          }
+        </div>
         }
         @else{
         <div>
